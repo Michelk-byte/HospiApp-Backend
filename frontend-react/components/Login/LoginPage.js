@@ -7,9 +7,10 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Button,
 } from "react-native";
 
-export default function Login() {
+export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,6 +30,7 @@ export default function Login() {
           style={styles.inputText}
           placeholder="Email..."
           placeholderTextColor="#003f5c"
+          name="email"
           onChangeText={(email) => setEmail(email)}
         />
       </View>
@@ -38,6 +40,7 @@ export default function Login() {
           style={styles.inputText}
           placeholder="Password..."
           placeholderTextColor="#003f5c"
+          name="password"
           secureTextEntry={true}
           onChangeText={(password) => setPassword(password)}
         />
@@ -46,10 +49,20 @@ export default function Login() {
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
+        <Text
+          style={styles.loginText}
+          onPress={() => navigation.navigate("Screen")}
+        >
+          LOGIN
+        </Text>
       </TouchableOpacity>
       <TouchableOpacity>
-        <Text style={styles.loginText1}>Signup</Text>
+        <Text
+          style={styles.loginText1}
+          onPress={() => navigation.navigate("Signup")}
+        >
+          Signup
+        </Text>
       </TouchableOpacity>
     </View>
   );

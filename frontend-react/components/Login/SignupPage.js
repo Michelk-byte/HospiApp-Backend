@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-export default function Signup() {
+export default function Signup({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
@@ -43,14 +43,25 @@ export default function Signup() {
           placeholderTextColor="#ffffff"
         />
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Register</Text>
+          <Text
+            style={styles.buttonText}
+            onPress={() => navigation.navigate("Screen")}
+          >
+            Register
+          </Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.signupTextCont}>
         <Text style={styles.signupText}>Already have an account?</Text>
         <TouchableOpacity>
-          <Text style={styles.signupButton}> Sign in</Text>
+          <Text
+            style={styles.signupButton}
+            onPress={() => navigation.navigate("Login")}
+          >
+            {" "}
+            Sign in
+          </Text>
         </TouchableOpacity>
       </View>
     </View>
