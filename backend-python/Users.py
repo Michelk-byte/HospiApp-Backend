@@ -39,7 +39,8 @@ class User:
         return redirect('/')
 
     def login(self):
-        data = request.get_json(force=True)
+        data = request.get_json(force=True)['action']['payload']
+        print(data)
         user = mongo.db.users.find_one({
             "email": data['email']
         })

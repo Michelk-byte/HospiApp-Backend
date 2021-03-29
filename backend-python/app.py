@@ -17,7 +17,7 @@ app.config['JWT_REFRESH_LIFESPAN'] = {'days': 30}
 app.config["MONGO_URI"] = "mongodb+srv://MichelKhoury:mobileapp@cluster0.zdacn.mongodb.net/hospiapp?retryWrites=true" \
                           "&w=majority"
 mongo = PyMongo(app)
-CORS(app, supports_credentials=True)
+cors = CORS(app, resources={r"/*": {"origins": "http://localhost:19006"}})
 
 
 # # Decorators
