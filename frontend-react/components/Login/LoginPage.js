@@ -9,35 +9,31 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
+import { set } from "react-native-reanimated";
 
-import {useDispatch,useSelector} from "react-redux";
-import {checkIn} from "../../actions/action"
+import { useDispatch, useSelector } from "react-redux";
+import { checkIn } from "../../actions/action";
+import Screen from "../pages/Screen";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const login=useSelector(state=>state.Login.logged)
+  const login = useSelector((state) => state.Login.logged);
 
   const dispatch = useDispatch();
-  const handleEmail=(e)=>{
-      SetEmail(e.target.value)
-  }
-  const handlePass=(e)=>{
-      SetPassword(e.target.value)
-  }
 
-  const handleSubmit=()=>{
-    const data={
-        Email:email,
-        pass:password
-    }
-    console.log(data)
-    dispatch(checkIn(data))
-}
+  const handleSubmit = () => {
+    const data = {
+      email: email,
+      password: password,
+    };
+    console.log(data);
+    dispatch(checkIn(data));
+  };
 
-  if(login){
-    navigation.navigate('screen')
+  if (login) {
+    return <Screen />;
   }
 
   return (
@@ -57,7 +53,7 @@ export default function Login({ navigation }) {
           placeholder="Email..."
           placeholderTextColor="#003f5c"
           name="email"
-          onChangeText={(email) => handleEmail(email)}
+          onChangeText={(email) => setEmail(email)}
         />
       </View>
       <View style={styles.inputView}>
@@ -68,17 +64,14 @@ export default function Login({ navigation }) {
           placeholderTextColor="#003f5c"
           name="password"
           secureTextEntry={true}
-          onChangeText={(password) => handlePass(password)}
+          onChangeText={(password) => setPassword(password)}
         />
       </View>
       <TouchableOpacity>
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.loginBtn}>
-        <Text
-          style={styles.loginText}
-          onPress={() => handleSubmit}
-        >
+        <Text style={styles.loginText} onPress={() => handleSubmit()}>
           LOGIN
         </Text>
       </TouchableOpacity>

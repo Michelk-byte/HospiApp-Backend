@@ -7,38 +7,36 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import {useDispatch,useSelector} from "react-redux";
-import {signUp} from "../../actions/action"
+import { useState, useDispatch, useSelector } from "react-redux";
+import { signUp } from "../../actions/action";
 
 export default function Signup({ navigation }) {
+  const [username, setUName] = useState("");
 
-  const [username,setUName]=useState("");
-
-  const [Email,SetEmail]=useState("");
-  const [pass,SetPassword]=useState("");
+  const [Email, SetEmail] = useState("");
+  const [pass, SetPassword] = useState("");
 
   const dispatch = useDispatch();
-  const handleU=(e)=>{
-    setUName(e.target.value)
-}
+  const handleU = (e) => {
+    setUName(e.target.value);
+  };
 
-const handleEmail=(e)=>{
-    SetEmail(e.target.value)
-}
+  const handleEmail = (e) => {
+    SetEmail(e.target.value);
+  };
 
-const handlePass=(e)=>{
-    SetPassword(e.target.value)
-}
+  const handlePass = (e) => {
+    SetPassword(e.target.value);
+  };
 
-const handleS=()=>{
-   const data={
-       email:Email,
-       password:pass,
-       user:username,
-     
-   }
-   dispatch(signUp(data))
-}
+  const handleS = () => {
+    const data = {
+      email: Email,
+      password: pass,
+      user: username,
+    };
+    dispatch(signUp(data));
+  };
 
   return (
     <View style={styles.container}>
@@ -50,7 +48,7 @@ const handleS=()=>{
           placeholderTextColor="#ffffff"
           selectionColor="#fff"
           keyboardType="email-address"
-          onChangeText={(user)=>handleU(user)}
+          onChangeText={(user) => handleU(user)}
         />
         <TextInput
           style={styles.inputBox}
@@ -59,7 +57,7 @@ const handleS=()=>{
           placeholderTextColor="#ffffff"
           selectionColor="#fff"
           keyboardType="email-address"
-          onChangeText={(email)=>handleEmail(email)}
+          onChangeText={(email) => handleEmail(email)}
         />
         <TextInput
           style={styles.inputBox}
@@ -67,7 +65,7 @@ const handleS=()=>{
           placeholder="Password"
           secureTextEntry={true}
           placeholderTextColor="#ffffff"
-          onChangeText={(pass)=>handlePass(pass)}
+          onChangeText={(pass) => handlePass(pass)}
         />
         <TextInput
           style={styles.inputBox}
@@ -77,10 +75,7 @@ const handleS=()=>{
           placeholderTextColor="#ffffff"
         />
         <TouchableOpacity style={styles.button}>
-          <Text
-            style={styles.buttonText}
-            onPress={() => handleS}
-          >
+          <Text style={styles.buttonText} onPress={() => handleS}>
             Register
           </Text>
         </TouchableOpacity>
