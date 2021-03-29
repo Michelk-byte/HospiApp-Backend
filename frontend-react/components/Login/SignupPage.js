@@ -7,8 +7,39 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import {useDispatch,useSelector} from "react-redux";
+import {signUp} from "../../actions/action"
 
 export default function Signup({ navigation }) {
+
+  const [username,setUName]=useState("");
+
+  const [Email,SetEmail]=useState("");
+  const [pass,SetPassword]=useState("");
+
+  const dispatch = useDispatch();
+  const handleU=(e)=>{
+    setUName(e.target.value)
+}
+
+const handleEmail=(e)=>{
+    SetEmail(e.target.value)
+}
+
+const handlePass=(e)=>{
+    SetPassword(e.target.value)
+}
+
+const handleS=()=>{
+   const data={
+       email:Email,
+       password:pass,
+       user:username,
+     
+   }
+   dispatch(signUp(data))
+}
+
   return (
     <View style={styles.container}>
       <View style={styles.container1}>
@@ -19,6 +50,7 @@ export default function Signup({ navigation }) {
           placeholderTextColor="#ffffff"
           selectionColor="#fff"
           keyboardType="email-address"
+          onChangeText={(user)=>handleU(user)}
         />
         <TextInput
           style={styles.inputBox}
@@ -27,6 +59,7 @@ export default function Signup({ navigation }) {
           placeholderTextColor="#ffffff"
           selectionColor="#fff"
           keyboardType="email-address"
+          onChangeText={(email)=>handleEmail(email)}
         />
         <TextInput
           style={styles.inputBox}
@@ -34,6 +67,7 @@ export default function Signup({ navigation }) {
           placeholder="Password"
           secureTextEntry={true}
           placeholderTextColor="#ffffff"
+          onChangeText={(pass)=>handlePass(pass)}
         />
         <TextInput
           style={styles.inputBox}
@@ -45,7 +79,7 @@ export default function Signup({ navigation }) {
         <TouchableOpacity style={styles.button}>
           <Text
             style={styles.buttonText}
-            onPress={() => navigation.navigate("Screen")}
+            onPress={() => handleS}
           >
             Register
           </Text>

@@ -10,9 +10,35 @@ import {
   Button,
 } from "react-native";
 
+import {useDispatch,useSelector} from "react-redux";
+import {checkIn} from "../../actions/action"
+
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const login=useSelector(state=>state.Login.logged)
+
+  const dispatch = useDispatch();
+  const handleEmail=(e)=>{
+      SetEmail(e.target.value)
+  }
+  const handlePass=(e)=>{
+      SetPassword(e.target.value)
+  }
+
+  const handleSubmit=()=>{
+    const data={
+        Email:email,
+        pass:password
+    }
+    console.log(data)
+    dispatch(checkIn(data))
+}
+
+  if(login){
+    navigation.navigate('screen')
+  }
 
   return (
     <View style={styles.container}>
@@ -31,7 +57,7 @@ export default function Login({ navigation }) {
           placeholder="Email..."
           placeholderTextColor="#003f5c"
           name="email"
-          onChangeText={(email) => setEmail(email)}
+          onChangeText={(email) => handleEmail(email)}
         />
       </View>
       <View style={styles.inputView}>
@@ -42,7 +68,7 @@ export default function Login({ navigation }) {
           placeholderTextColor="#003f5c"
           name="password"
           secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
+          onChangeText={(password) => handlePass(password)}
         />
       </View>
       <TouchableOpacity>
@@ -51,7 +77,7 @@ export default function Login({ navigation }) {
       <TouchableOpacity style={styles.loginBtn}>
         <Text
           style={styles.loginText}
-          onPress={() => navigation.navigate("Screen")}
+          onPress={() => handleSubmit}
         >
           LOGIN
         </Text>
