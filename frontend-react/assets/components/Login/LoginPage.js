@@ -20,8 +20,7 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState("");
 
   const login = useSelector((state) => state.Login.logged);
-  const credentials = useSelector((state) => state.Login.data);
-  console.log(login);
+
   const dispatch = useDispatch();
 
   const handleSubmit = () => {

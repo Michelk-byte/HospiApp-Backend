@@ -1,13 +1,12 @@
 import api from "./index";
 
 export const CheckLogIn = async (data) => {
-  console.log(data.action.payload.email);
   try {
     const res = await api.post("/user/login", data);
-    console.log(res.data);
-    return res.data;
+    console.log(res);
+    return res;
   } catch (error) {
-    console.log(error);
+    return -1;
   }
 };
 
