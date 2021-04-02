@@ -21,16 +21,22 @@ export default function Signup({ navigation }) {
 
   const dispatch = useDispatch();
 
-  const message = useSelector((state) => state.Signup.message);
-  const status = useSelector((state) => state.Signup.status);
+  const [messagecolor, SetMessageColor] = useState("");
+  const [message_show, SetMEssageShow] = useState("");
 
+  let message = useSelector((state) => state.Signup.message);
+  const status = useSelector((state) => state.Signup.status);
   let register_ = useSelector((state) => state.Signup.register);
 
   if (register_) {
+    SetMEssageShow(message);
     if (status === 200) {
-      return <Login />;
+      console.log("green");
+      SetMessageColor("green");
     } else if (status !== 200 && status !== "") {
+      console.log("red");
       console.log(message);
+      SetMessageColor("red");
     }
     dispatch(register(false));
   }
@@ -47,71 +53,74 @@ export default function Signup({ navigation }) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.container1}>
-        <TextInput
-          style={styles.inputBox}
-          underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Username"
-          placeholderTextColor="#ffffff"
-          selectionColor="#fff"
-          keyboardType="email-address"
-          onChangeText={(user) => setUName(user)}
-        />
-        <TextInput
-          style={styles.inputBox}
-          underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Email"
-          placeholderTextColor="#ffffff"
-          selectionColor="#fff"
-          keyboardType="email-address"
-          onChangeText={(email) => SetEmail(email)}
-        />
-        <TextInput
-          style={styles.inputBox}
-          underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Password"
-          secureTextEntry={true}
-          placeholderTextColor="#ffffff"
-          onChangeText={(pass) => SetPassword(pass)}
-        />
-        <TextInput
-          style={styles.inputBox}
-          underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="Verify Password"
-          secureTextEntry={true}
-          placeholderTextColor="#ffffff"
-          onChangeText={(verifypass) => SetVerifypass(verifypass)}
-        />
-        <TextInput
-          style={styles.inputBox}
-          underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="PhoneNumber"
-          placeholderTextColor="#ffffff"
-          selectionColor="#fff"
-          keyboardType=""
-          onChangeText={(pnumber) => SetPnumber(pnumber)}
-        />
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText} onPress={() => handleS()}>
-            Register
-          </Text>
-        </TouchableOpacity>
-      </View>
+    <>
+      <View style={styles.container}>
+        <View style={styles.container1}>
+          <TextInput
+            style={styles.inputBox}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            placeholder="Username"
+            placeholderTextColor="#ffffff"
+            selectionColor="#fff"
+            keyboardType="email-address"
+            onChangeText={(user) => setUName(user)}
+          />
+          <TextInput
+            style={styles.inputBox}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            placeholder="Email"
+            placeholderTextColor="#ffffff"
+            selectionColor="#fff"
+            keyboardType="email-address"
+            onChangeText={(email) => SetEmail(email)}
+          />
+          <TextInput
+            style={styles.inputBox}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            placeholder="Password"
+            secureTextEntry={true}
+            placeholderTextColor="#ffffff"
+            onChangeText={(pass) => SetPassword(pass)}
+          />
+          <TextInput
+            style={styles.inputBox}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            placeholder="Verify Password"
+            secureTextEntry={true}
+            placeholderTextColor="#ffffff"
+            onChangeText={(verifypass) => SetVerifypass(verifypass)}
+          />
+          <TextInput
+            style={styles.inputBox}
+            underlineColorAndroid="rgba(0,0,0,0)"
+            placeholder="PhoneNumber"
+            placeholderTextColor="#ffffff"
+            selectionColor="#fff"
+            keyboardType=""
+            onChangeText={(pnumber) => SetPnumber(pnumber)}
+          />
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText} onPress={() => handleS()}>
+              Register
+            </Text>
+          </TouchableOpacity>
+          <Text style={{ color: `${messagecolor}` }}>{message_show}</Text>
+        </View>
 
-      <View style={styles.signupTextCont}>
-        <Text style={styles.signupText}>Already have an account?</Text>
-        <TouchableOpacity>
-          <Text
-            style={styles.signupButton}
-            onPress={() => navigation.navigate("Login")}
-          >
-            {" "}
-            Sign in
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.signupTextCont}>
+          <Text style={styles.signupText}>Already have an account?</Text>
+          <TouchableOpacity>
+            <Text
+              style={styles.signupButton}
+              onPress={() => navigation.navigate("Login")}
+            >
+              {" "}
+              Sign in
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 

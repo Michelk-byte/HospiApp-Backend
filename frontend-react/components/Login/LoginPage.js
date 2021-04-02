@@ -13,15 +13,13 @@ import { set } from "react-native-reanimated";
 
 import { useDispatch, useSelector } from "react-redux";
 import { checkIn } from "../../actions/action";
+import { getCookie } from "../../cookies";
 import Screen from "../pages/Screen";
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = useSelector((state) => state.Login.logged);
-  const credentials = useSelector((state) => state.Login.data);
-  console.log(login);
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
@@ -33,7 +31,7 @@ export default function Login({ navigation }) {
     dispatch(checkIn(data));
   };
 
-  if (login) {
+  if (getCookie("sid") != "") {
     return <Screen />;
   }
 

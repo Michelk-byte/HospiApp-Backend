@@ -1,16 +1,19 @@
-import { LOGGED_IN, DATA_IN } from "../actions/action";
+import { DATA_IN, ERROR_IN, ERROR_CRED } from "../actions/action";
 
 const initial = {
-  logged: false,
   data: null,
+  error: "",
+  status: false,
 };
 
 const LoggedReducer = (state = initial, action) => {
   switch (action.type) {
-    case LOGGED_IN:
-      return { ...state, logged: action.payload };
+    case ERROR_IN:
+      return { ...state, error: action.payload };
     case DATA_IN:
       return { ...state, data: action.payload };
+    case ERROR_CRED:
+      return { ...state, status: action.payload };
     default:
       return state;
   }
