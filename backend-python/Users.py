@@ -9,17 +9,30 @@ class User:
         del user['password']
         session['logged_in'] = True
         session['user'] = user
+        user['status'] = 200
         return jsonify(user), 200
 
     def signup(self):
-        print(request.form)
+        data = request.get_json(force=True)
+        print(data)
+
+        if data["pnumber"]:
+            if not data["pnumber"][1:].replace(' ', '').isdigit():
+                return jsonify({"message": "phone number contains letters!", "status": 400}), 200
+
+            if data['pnumber'][0] != "+":
+                return jsonify({"message": "phone number should start with +", "status": 400}), 200
+
+        if data['password'] != data['verifypass']:
+            return jsonify({"message": "you didnt verify your password", "status": 400}), 200
 
         # Create the user object
         user = {
             "_id": uuid.uuid4().hex,
-            "name": request.form.get('name'),
-            "email": request.form.get('email'),
-            "password": request.form.get('password')
+            "name": data['name'],
+            "email": data['email'],
+            "password": data['password'],
+            "pnumber": data['pnumber']
         }
 
         # Encrypt the password
@@ -27,12 +40,12 @@ class User:
 
         # Check for existing email address
         if mongo.db.users.find_one({"email": user['email']}):
-            return jsonify({"error": "Email address already in use"}), 400
+            return jsonify({"message": "Email address already in use", "status": 400}), 200
 
         if mongo.db.users.insert(user, w="majority"):
-            return self.start_session(user)
+            return jsonify({"message": "Account Created!", "status": 200}), 200
 
-        return jsonify({"error": "Signup failed"}), 400
+        return jsonify({"message": "Signup failed", "status": 400}), 200
 
     def signout(self):
         session.clear()
@@ -48,4 +61,4 @@ class User:
         if user and pbkdf2_sha256.verify(data['password'], user['password']):
             return self.start_session(user)
 
-        return jsonify({"error": "Invalid login credentials"}), 401
+        return jsonify({"message": "Invalid login credentials", "status": 400}), 200
