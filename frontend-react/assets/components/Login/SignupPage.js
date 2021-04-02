@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import {
   StyleSheet,
   Text,
@@ -7,41 +7,33 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { signUp, register } from "../../actions/action";
-import Login from "./LoginPage";
+import { useState, useDispatch, useSelector } from "react-redux";
+import { signUp } from "../../actions/action";
 
 export default function Signup({ navigation }) {
   const [username, setUName] = useState("");
 
   const [Email, SetEmail] = useState("");
   const [pass, SetPassword] = useState("");
-  const [pnumber, SetPnumber] = useState("");
-  const [verifypass, SetVerifypass] = useState("");
 
   const dispatch = useDispatch();
+  const handleU = (e) => {
+    setUName(e.target.value);
+  };
 
-  const message = useSelector((state) => state.Signup.message);
-  const status = useSelector((state) => state.Signup.status);
+  const handleEmail = (e) => {
+    SetEmail(e.target.value);
+  };
 
-  let register_ = useSelector((state) => state.Signup.register);
-
-  if (register_) {
-    if (status === 200) {
-      return <Login />;
-    } else if (status !== 200 && status !== "") {
-      console.log(message);
-    }
-    dispatch(register(false));
-  }
+  const handlePass = (e) => {
+    SetPassword(e.target.value);
+  };
 
   const handleS = () => {
     const data = {
       email: Email,
       password: pass,
-      name: username,
-      pnumber: pnumber,
-      verifypass: verifypass,
+      user: username,
     };
     dispatch(signUp(data));
   };
@@ -56,7 +48,7 @@ export default function Signup({ navigation }) {
           placeholderTextColor="#ffffff"
           selectionColor="#fff"
           keyboardType="email-address"
-          onChangeText={(user) => setUName(user)}
+          onChangeText={(user) => handleU(user)}
         />
         <TextInput
           style={styles.inputBox}
@@ -65,7 +57,7 @@ export default function Signup({ navigation }) {
           placeholderTextColor="#ffffff"
           selectionColor="#fff"
           keyboardType="email-address"
-          onChangeText={(email) => SetEmail(email)}
+          onChangeText={(email) => handleEmail(email)}
         />
         <TextInput
           style={styles.inputBox}
@@ -73,7 +65,7 @@ export default function Signup({ navigation }) {
           placeholder="Password"
           secureTextEntry={true}
           placeholderTextColor="#ffffff"
-          onChangeText={(pass) => SetPassword(pass)}
+          onChangeText={(pass) => handlePass(pass)}
         />
         <TextInput
           style={styles.inputBox}
@@ -81,19 +73,9 @@ export default function Signup({ navigation }) {
           placeholder="Verify Password"
           secureTextEntry={true}
           placeholderTextColor="#ffffff"
-          onChangeText={(verifypass) => SetVerifypass(verifypass)}
-        />
-        <TextInput
-          style={styles.inputBox}
-          underlineColorAndroid="rgba(0,0,0,0)"
-          placeholder="PhoneNumber"
-          placeholderTextColor="#ffffff"
-          selectionColor="#fff"
-          keyboardType=""
-          onChangeText={(pnumber) => SetPnumber(pnumber)}
         />
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText} onPress={() => handleS()}>
+          <Text style={styles.buttonText} onPress={() => handleS}>
             Register
           </Text>
         </TouchableOpacity>

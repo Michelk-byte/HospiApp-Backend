@@ -10,13 +10,22 @@ import * as React from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-
+import { getCookie } from "./cookies.js";
 const Stack = createStackNavigator();
 
 function App() {
+  let initial_route = "Home";
+
+  let sid = getCookie("sid");
+
+  if (sid !== "") {
+    initial_route = "Screen";
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
+        initialRouteName={initial_route}
         screenOptions={{
           headerShown: false,
         }}

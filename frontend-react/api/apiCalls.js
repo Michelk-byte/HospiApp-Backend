@@ -4,14 +4,13 @@ export const CheckLogIn = async (data) => {
   try {
     const res = await api.post("/user/login", data);
     console.log(res);
-    return res;
+    return res.data;
   } catch (error) {
     return -1;
   }
 };
 
 export const SignUp = async (data) => {
-  console.log(data);
   try {
     const res = await api.post("/user/signup", data);
     return res.data;
