@@ -2,7 +2,8 @@ import * as React from "react";
 import { Image, Button, View, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
-import AppointmentScreen from "./AppointmentScreen";
+import Hospital from "./Hospital";
+import Doctor from "./Doctor";
 
 const Stack = createStackNavigator();
 
@@ -23,7 +24,7 @@ const ShoppingCartIcon = () => {
 export default function HomeStack() {
   return (
     <Stack.Navigator
-      initialRouteName="AppointmentScreen"
+      initialRouteName="Hospital"
       screenOptions={{
         headerShown: true,
         headerStyle: { backgroundColor: "red" },
@@ -32,8 +33,16 @@ export default function HomeStack() {
       }}
     >
       <Stack.Screen
-        name="AppointmentScreen"
-        component={AppointmentScreen}
+        name="Hospital"
+        component={Hospital}
+        options={({ navigation }) => ({
+          headerTitle: () => <View></View>,
+          headerRight: () => <ShoppingCartIcon />,
+        })}
+      />
+      <Stack.Screen
+        name="Doctor"
+        component={Doctor}
         options={({ navigation }) => ({
           headerTitle: () => <View></View>,
           headerRight: () => <ShoppingCartIcon />,
