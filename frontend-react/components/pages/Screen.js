@@ -1,6 +1,8 @@
 import * as React from "react";
 
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/Ionicons";
+import Fontisto from "react-native-vector-icons/Fontisto";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,12 +16,12 @@ import SettingsStack from "./Setting/SettingsStack";
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function Screen() {
+function Screen({ navigation }) {
   return (
     <Tab.Navigator
       initialRouteName="Feed"
       tabBarOptions={{
-        activeTintColor: "#42f44b",
+        activeTintColor: "red",
       }}
     >
       <Tab.Screen
@@ -39,7 +41,7 @@ function Screen() {
           tabBarLabel: "Appointment",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="appointment"
+              name="hospital-box"
               color={color}
               size={size}
             />
@@ -52,7 +54,7 @@ function Screen() {
         options={{
           tabBarLabel: "LabReservation",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="lab" color={color} size={size} />
+            <Fontisto name="injection-syringe" color={color} size={size} />
           ),
         }}
       />
@@ -62,7 +64,7 @@ function Screen() {
         options={{
           tabBarLabel: "Settings",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="settings" color={color} size={size} />
+            <Icon name="md-settings" color={color} size={size} />
           ),
         }}
       />

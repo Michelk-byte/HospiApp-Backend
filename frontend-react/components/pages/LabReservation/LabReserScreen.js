@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, SafeAreaView } from "react-native";
 
-const LabReserScreen = () => {
+const LabReserScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>

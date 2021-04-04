@@ -45,7 +45,6 @@ export default function Login({ navigation }) {
           imageStyle={{ opacity: 1 }}
         />
       </View>
-
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}

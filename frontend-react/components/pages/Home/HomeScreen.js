@@ -5,6 +5,7 @@ import {
   View,
   Text,
   SafeAreaView,
+  Button,
 } from "react-native";
 
 import { useSelector } from "react-redux";
