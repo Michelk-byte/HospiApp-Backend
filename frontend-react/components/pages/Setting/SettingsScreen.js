@@ -7,15 +7,7 @@ import {
   SafeAreaView,
 } from "react-native";
 
-import { useSelector } from "react-redux";
-
-const HomeScreen = ({ navigation }) => {
-  let credentials = useSelector((state) => state.Login.data);
-
-  if (credentials == null) {
-    credentials = "";
-  }
-
+const SettingsScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1, padding: 16 }}>
@@ -33,22 +25,8 @@ const HomeScreen = ({ navigation }) => {
               marginBottom: 16,
             }}
           >
-            You are {credentials.name}
+            You are on Setting Screen
           </Text>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() =>
-              navigation.navigate("SettingsStack", { screen: "Settings" })
-            }
-          >
-            <Text>Go to settng Tab</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => navigation.navigate("Details")}
-          >
-            <Text>Open Details Screen</Text>
-          </TouchableOpacity>
         </View>
         <Text
           style={{
@@ -70,7 +48,6 @@ const HomeScreen = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
@@ -80,4 +57,4 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-export default HomeScreen;
+export default SettingsScreen;
