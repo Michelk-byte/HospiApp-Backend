@@ -17,6 +17,8 @@ class User:
         print(data)
 
         if data["pnumber"]:
+            if len(data["pnumber"]) == 0:
+                return jsonify({"message": "Phone number empty", "status": 400}), 200
             if not data["pnumber"][1:].replace(' ', '').isdigit():
                 return jsonify({"message": "phone number contains letters!", "status": 400}), 200
 
@@ -25,6 +27,26 @@ class User:
 
         if data['password'] != data['verifypass']:
             return jsonify({"message": "you didnt verify your password", "status": 400}), 200
+
+        if len(data["password"]) == 0:
+            return jsonify({"message": "Password empty", "status": 400}), 200
+
+        if len(data["verifypass"]) == 0:
+            return jsonify({"message": "Verify Password empty", "status": 400}), 200
+
+        # check email if valid
+        if '@' not in data['email']:
+            return jsonify({"message": "Invalid domain email", "status": 400}), 200
+        domain = data['email'].split('@')
+        if len(domain) != 2:
+            return jsonify({"message": "Invalid domain email", "status": 400}), 200
+
+        domain = domain[1]
+        if domain not in ['gmail.com', 'hotmail.com', 'outlook.com']:
+            return jsonify({"message": "Invalid domain email", "status": 400}), 200
+
+        if len(data["email"]) == 0:
+            return jsonify({"message": "Email empty", "status": 400}), 200
 
         # Create the user object
         user = {
