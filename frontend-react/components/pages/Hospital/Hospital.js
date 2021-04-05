@@ -10,7 +10,6 @@ const AppointmentScreen = ({ navigation }) => {
       <p>
         <a href="#0">Choose a Hospital</a>
       </p>
-      {/* <View style={styles.hospital}>Choose a Hospital</View> */}
       <CardViewWithImage
         width={"96%"}
         source={{ uri: "https://www.hdf.usj.edu.lb/imag/11/hdf3.jpg" }}
