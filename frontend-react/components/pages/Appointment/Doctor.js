@@ -2,66 +2,87 @@ import * as React from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { Card, ListItem, Button, Icon } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
-
-const users = [
-  {
-    name: "brynn",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg",
-  },
-  {
-    name: "brynn",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg",
-  },
-  {
-    name: "brynn",
-    avatar: "https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg",
-  },
-];
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 const Doctor = ({ navigation }) => {
   return (
     <ScrollView>
-      <Card>
-        <Card.Title>CARD WITH DIVIDER</Card.Title>
+      <Card containerStyle={{ width: "60%", marginLeft: "20%" }}>
+        <Card.Title>Dr. A - Allergy and Immunology</Card.Title>
         <Card.Divider />
-        {users.map((u, i) => {
-          return (
-            <View key={i} style={styles.user}>
-              <Image
-                style={styles.image}
-                resizeMode="cover"
-                source={{ uri: u.avatar }}
-              />
-              <Text style={styles.name}>{u.name}</Text>
-            </View>
-          );
-        })}
-      </Card>
-      // implemented without image without header, using ListItem component
-      <Card containerStyle={{ padding: 0 }}>
-        {users.map((u, i) => (
-          <ListItem key={i} />
-        ))}
-      </Card>
-      <Card>
-        <Card.Title>HELLO WORLD</Card.Title>
+        <Card.Image
+          containerStyle={{ maxheight: "1000000000000" }}
+          source={require("../../../assets/doctor1.jpeg")}
+        ></Card.Image>
         <Card.Divider />
-        <Card.Image source={require("../../../assets/doctor1.jpeg")}>
-          <Text style={{ marginBottom: 10 }}>
-            The idea with React Native Elements is more about component
-            structure than actual design.
-          </Text>
+        <View style={{ width: "100%", alignItems: "center" }}>
           <Button
-            icon={<Icon name="code" color="#ffffff" />}
+            icon={
+              <FontAwesome name="stethoscope" color="#ffffff" size="20px" />
+            }
             buttonStyle={{
-              borderRadius: 0,
+              borderRadius: 10,
               marginLeft: 0,
               marginRight: 0,
               marginBottom: 0,
+              backgroundColor: "red",
             }}
-            title="VIEW NOW"
+            title="BOOK AN APPOINTMENT"
+            titleStyle={{ marginLeft: 10, fontSize: 15 }}
           />
-        </Card.Image>
+        </View>
+      </Card>
+
+      <Card containerStyle={{ width: "60%", marginLeft: "20%" }}>
+        <Card.Title>Dr. B - Anesthesiology</Card.Title>
+        <Card.Divider />
+        <Card.Image
+          containerStyle={{ maxheight: "1000000000000" }}
+          source={require("../../../assets/doctor2.jpeg")}
+        ></Card.Image>
+        <Card.Divider />
+        <View style={{ width: "100%", alignItems: "center" }}>
+          <Button
+            icon={
+              <FontAwesome name="stethoscope" color="#ffffff" size="20px" />
+            }
+            buttonStyle={{
+              borderRadius: 10,
+              marginLeft: 0,
+              marginRight: 0,
+              marginBottom: 0,
+              backgroundColor: "red",
+            }}
+            title="BOOK AN APPOINTMENT"
+            titleStyle={{ marginLeft: 10, fontSize: 15 }}
+          />
+        </View>
+      </Card>
+
+      <Card containerStyle={{ width: "60%", marginLeft: "20%" }}>
+        <Card.Title>Dr. C - Dermatology</Card.Title>
+        <Card.Divider />
+        <Card.Image
+          containerStyle={{ maxheight: "1000000000000" }}
+          source={require("../../../assets/doctor3.jpeg")}
+        ></Card.Image>
+        <Card.Divider />
+        <View style={{ width: "100%", alignItems: "center" }}>
+          <Button
+            icon={
+              <FontAwesome name="stethoscope" color="#ffffff" size="20px" />
+            }
+            buttonStyle={{
+              borderRadius: 10,
+              marginLeft: 0,
+              marginRight: 0,
+              marginBottom: 0,
+              backgroundColor: "red",
+            }}
+            title="BOOK AN APPOINTMENT"
+            titleStyle={{ marginLeft: 10, fontSize: 15 }}
+          />
+        </View>
       </Card>
     </ScrollView>
   );
