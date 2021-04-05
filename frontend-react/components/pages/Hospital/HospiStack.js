@@ -4,10 +4,11 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { createStackNavigator } from "@react-navigation/stack";
 import Hospital from "./Hospital";
 import Doctor from "./Doctor";
+import AppointmentScreen from "../AppointmentScreen";
 
 const Stack = createStackNavigator();
 
-const ShoppingCartIcon = () => {
+const ShoppingCartIcon = ({ navigation }) => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <Icon
@@ -16,12 +17,13 @@ const ShoppingCartIcon = () => {
         style={{
           marginRight: "20px",
         }}
+        onPress={() => navigation.navigate("AppointmentScreen")}
       />
     </View>
   );
 };
 
-export default function HomeStack() {
+export default function HospiStack() {
   return (
     <Stack.Navigator
       initialRouteName="Hospital"
@@ -37,7 +39,7 @@ export default function HomeStack() {
         component={Hospital}
         options={({ navigation }) => ({
           headerTitle: () => <View></View>,
-          headerRight: () => <ShoppingCartIcon />,
+          headerRight: () => <ShoppingCartIcon navigation={navigation} />,
         })}
       />
       <Stack.Screen
@@ -45,7 +47,16 @@ export default function HomeStack() {
         component={Doctor}
         options={({ navigation }) => ({
           headerTitle: () => <View></View>,
-          headerRight: () => <ShoppingCartIcon />,
+          headerRight: () => <ShoppingCartIcon navigation={navigation} />,
+        })}
+      />
+
+      <Stack.Screen
+        name="AppointmentScreen"
+        component={AppointmentScreen}
+        options={({ navigation }) => ({
+          headerTitle: () => <View></View>,
+          headerRight: () => <ShoppingCartIcon navigation={navigation} />,
         })}
       />
     </Stack.Navigator>

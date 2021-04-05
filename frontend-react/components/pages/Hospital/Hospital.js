@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { CardViewWithImage } from "react-native-simple-card-view";
-import "./Appoint.css";
+import "./Hospi.css";
 
 const AppointmentScreen = ({ navigation }) => {
   return (
