@@ -72,6 +72,7 @@ const Doctor = ({ navigation }) => {
               backgroundColor: "red",
             }}
             title="BOOK AN APPOINTMENT"
+            onPress={() => navigation.navigate("DoctorProfile")}
             titleStyle={{ marginLeft: 10, fontSize: 15 }}
           />
         </View>
@@ -124,6 +125,7 @@ const Doctor = ({ navigation }) => {
               backgroundColor: "red",
             }}
             title="BOOK AN APPOINTMENT"
+            onPress={() => navigation.navigate("DoctorProfile")}
             titleStyle={{ marginLeft: 10, fontSize: 15 }}
           />
         </View>

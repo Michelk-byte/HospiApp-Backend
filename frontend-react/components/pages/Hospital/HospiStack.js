@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Hospital from "./Hospital";
 import Doctor from "./Doctor";
 import AppointmentScreen from "../AppointmentScreen";
+import DoctorProfile from "./DoctorProfile";
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,14 @@ export default function HospiStack() {
       <Stack.Screen
         name="Doctor"
         component={Doctor}
+        options={({ navigation }) => ({
+          headerTitle: () => <View></View>,
+          headerRight: () => <ShoppingCartIcon navigation={navigation} />,
+        })}
+      />
+      <Stack.Screen
+        name="DoctorProfile"
+        component={DoctorProfile}
         options={({ navigation }) => ({
           headerTitle: () => <View></View>,
           headerRight: () => <ShoppingCartIcon navigation={navigation} />,
