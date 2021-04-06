@@ -5,8 +5,15 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { CardViewWithImage } from "react-native-simple-card-view";
 import { List } from "react-native-paper";
 import { ScrollView } from "react-native-gesture-handler";
+import DatePicker from "react-date-picker";
+import TimePicker from "react-time-picker";
 
 const Test = ({ navigation }) => {
+  const [value, onChange] = useState("10:00");
+  const [datevalue, setDate] = useState(new Date());
+  console.log(value);
+  console.log(datevalue);
+
   return (
     <ScrollView>
       <CardViewWithImage
@@ -44,19 +51,43 @@ const Test = ({ navigation }) => {
         left={(props) => <List.Icon {...props} icon="cash" />}
       />
 
-      <Button
-        icon={<FontAwesome name="stethoscope" color="#ffffff" size="20px" />}
-        buttonStyle={{
-          borderRadius: 10,
-          marginLeft: 0,
-          marginRight: 0,
+      <View
+        style={{
+          alignItems: "center",
+          zIndex: "-1",
           marginTop: "10px",
-          marginBottom: 0,
-          backgroundColor: "red",
+          display: "flex",
+          justifyContent: "space-around",
+          flexDirection: "row",
+          height: "50px",
         }}
-        title="BOOK AN APPOINTMENT"
-        titleStyle={{ marginLeft: 10, fontSize: 15 }}
-      />
+      >
+        <View style={{ alignItems: "center", zIndex: "-1", marginTop: "5px" }}>
+          <Text style={{ marginBottom: "10px" }}>Pick a Day:</Text>
+          <DatePicker onChange={setDate} value={datevalue} />
+        </View>
+        <View style={{ alignItems: "center", zIndex: "-1", marginTop: "5px" }}>
+          <Text style={{ marginBottom: "10px" }}>Pick an Hour:</Text>
+          <TimePicker onChange={onChange} value={value} disableClock={false} />
+        </View>
+      </View>
+
+      <View style={{ width: "100%", alignItems: "center" }}>
+        <Button
+          style={{ zIndex: -1 }}
+          icon={<FontAwesome name="stethoscope" color="#ffffff" size="20px" />}
+          buttonStyle={{
+            borderRadius: 10,
+            marginLeft: 0,
+            marginRight: 0,
+            marginTop: "15px",
+            marginBottom: 10,
+            backgroundColor: "red",
+          }}
+          title="BOOK AN APPOINTMENT"
+          titleStyle={{ marginLeft: 10, fontSize: 15 }}
+        />
+      </View>
     </ScrollView>
   );
 };
