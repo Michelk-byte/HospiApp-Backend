@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 function Screen({ navigation }) {
   return (
     <Tab.Navigator
-      initialRouteName="HospiStack"
+      initialRouteName="LabReserStack"
       tabBarOptions={{
         activeTintColor: "red",
       }}
