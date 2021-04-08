@@ -1,24 +1,31 @@
 import * as React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import SettingsScreen from "./SettingsScreen";
+
+import Pass from "./Pass"
+import Prototype from "./Prototype"
 
 const Stack = createStackNavigator();
 
 export default function SettingsStack() {
   return (
     <Stack.Navigator
-      initialRouteName="Settings"
+      initialRouteName="Prototype"
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         headerStyle: { backgroundColor: "#42f44b" },
         headerTintColor: "#fff",
         headerTitleStyle: { fontWeight: "bold" },
       }}
     >
       <Stack.Screen
-        name="Settings"
-        component={SettingsScreen}
+        name="Prototype"
+        component={Prototype}
         options={{ title: "Setting Page" }}
+      />
+      <Stack.Screen
+        name="Edit"
+        component={Pass}
+        options={{ title: "Edit Profile Page" }}
       />
     </Stack.Navigator>
   );
