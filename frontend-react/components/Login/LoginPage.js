@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import {
   StyleSheet,
@@ -9,18 +9,30 @@ import {
   TouchableOpacity,
   Button,
 } from "react-native";
-import { set } from "react-native-reanimated";
+
 
 import { useDispatch, useSelector } from "react-redux";
-import { checkIn } from "../../actions/action";
+import { checkIn,errorcred } from "../../actions/action";
 import { getCookie } from "../../cookies";
 import Screen from "../pages/Screen";
 
 export default function Login({ navigation }) {
+  
+  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const message = useSelector((state) => state.Login.status);
+  //console.log(message)
   const dispatch = useDispatch();
+  if(message){
+    alert("invalid credentials")
+    dispatch(errorcred(false))
+  }
+  
+
+ 
 
   const handleSubmit = () => {
     const data = {
