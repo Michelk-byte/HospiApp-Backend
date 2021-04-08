@@ -2,9 +2,9 @@ from flask import Flask, render_template, session, redirect
 from flask_pymongo import PyMongo
 from flask_cors import CORS, cross_origin
 from functools import wraps
-from Users import *
 
-# import pymongo
+''
+# import pymongopip install flask-cors --upgrade
 
 app = Flask(__name__)
 # app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
@@ -18,7 +18,7 @@ app.config["MONGO_URI"] = "mongodb+srv://MichelKhoury:mobileapp@cluster0.zdacn.m
                           "&w=majority"
 mongo = PyMongo(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
-
+from Users import *
 
 # # Decorators
 # def login_required(f):
