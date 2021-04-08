@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeStack from "./Home/HomeStack";
 import LabReserStack from "./LabReservation/LabReserStack";
-import AppoinStack from "./Appointment/AppoinStack";
+import HospiStack from "./Hospital/HospiStack";
 import SettingsStack from "./Setting/SettingsStack";
 
 const Stack = createStackNavigator();
@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 function Screen({ navigation }) {
   return (
     <Tab.Navigator
-      initialRouteName="Feed"
+      initialRouteName="HospiStack"
       tabBarOptions={{
         activeTintColor: "red",
       }}
@@ -35,8 +35,8 @@ function Screen({ navigation }) {
         }}
       />
       <Tab.Screen
-        name="AppoinStack"
-        component={AppoinStack}
+        name="HospiStack"
+        component={HospiStack}
         options={{
           tabBarLabel: "Appointment",
           tabBarIcon: ({ color, size }) => (
