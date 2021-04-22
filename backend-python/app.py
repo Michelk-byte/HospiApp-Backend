@@ -18,7 +18,56 @@ app.config["MONGO_URI"] = "mongodb+srv://MichelKhoury:mobileapp@cluster0.zdacn.m
                           "&w=majority"
 mongo = PyMongo(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
+
 from Users import *
+from Controllers.Hospital import *
+from Controllers.Lab import *
+
+
+@app.route('/user/signup', methods=['POST'])
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def signup():
+    return User().signup()
+
+
+@app.route('/user/signout')
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def signout():
+    return User().signout()
+
+
+@app.route('/user/login', methods=['POST'])
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def login():
+    return User().login()
+
+
+@app.route('/user/hospital')
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def hospital():
+    return Hospital().getAllHospitals()
+
+
+@app.route('/user/hospital/<id>')
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def doctor(id):
+    return Hospital().getAllDoctors_by_Hospital(id)
+
+@app.route('/user/lab')
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def lab():
+    return Lab().getAllLabs()
+
+
+@app.route('/user/lab/<id>')
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def test(id):
+    return Lab().getAllTests_by_Lab(id)
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
 
 # # Decorators
 # def login_required(f):
@@ -41,25 +90,3 @@ from Users import *
 # @login_required
 # def dashboard():
 #     return render_template('dashboard.html')
-
-
-@app.route('/user/signup', methods=['POST'])
-@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
-def signup():
-    return User().signup()
-
-
-@app.route('/user/signout')
-@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
-def signout():
-    return User().signout()
-
-
-@app.route('/user/login', methods=['POST'])
-@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
-def login():
-    return User().login()
-
-
-if __name__ == '__main__':
-    app.run(debug=True)

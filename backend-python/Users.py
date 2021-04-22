@@ -16,14 +16,16 @@ class User:
         data = request.get_json(force=True)
         print(data)
 
-        if data["pnumber"]:
-            if len(data["pnumber"]) == 0:
-                return jsonify({"message": "Phone number empty", "status": 400}), 200
-            if not data["pnumber"][1:].replace(' ', '').isdigit():
-                return jsonify({"message": "phone number contains letters!", "status": 400}), 200
+        if len(data["name"]) == 0:
+            return jsonify({"message": "Username empty", "status": 400}), 200
 
-            if data['pnumber'][0] != "+":
-                return jsonify({"message": "phone number should start with +", "status": 400}), 200
+        if len(data["pnumber"]) == 0:
+            return jsonify({"message": "Phone number empty", "status": 400}), 200
+        if not data["pnumber"][1:].replace(' ', '').isdigit():
+            return jsonify({"message": "phone number contains letters!", "status": 400}), 200
+
+        if data['pnumber'][0] != "+":
+            return jsonify({"message": "phone number should start with +", "status": 400}), 200
 
         if data['password'] != data['verifypass']:
             return jsonify({"message": "you didnt verify your password", "status": 400}), 200
