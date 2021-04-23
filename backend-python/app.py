@@ -1,4 +1,4 @@
-from flask import Flask, render_template, session, redirect
+from flask import Flask
 from flask_pymongo import PyMongo
 from flask_cors import CORS, cross_origin
 from functools import wraps
@@ -19,9 +19,10 @@ app.config["MONGO_URI"] = "mongodb+srv://MichelKhoury:mobileapp@cluster0.zdacn.m
 mongo = PyMongo(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
-from Users import *
+from Controllers.Users import *
 from Controllers.Hospital import *
 from Controllers.Lab import *
+
 
 # # Decorators
 def login_required(f):
@@ -31,7 +32,9 @@ def login_required(f):
             return f(*args, **kwargs)
         else:
             return jsonify({"message": "You need to authenticate first", "status": 400}), 200
+
     return wrap
+
 
 @app.route('/user/signup', methods=['POST'])
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
@@ -49,6 +52,20 @@ def signout():
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def login():
     return User().login()
+
+
+@app.route('/user/editprofile/<id>', methods=['PUT'])
+@login_required
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def edit_profile(id):
+    return User().edit_profile(id)
+
+
+@app.route('/user/changepassword/<id>', methods=['PUT'])
+@login_required
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def change_password(id):
+    return User().changepassword(id)
 
 
 @app.route('/user/hospital')
@@ -84,6 +101,7 @@ def lab():
 def test_lab(id):
     return Lab().getAllTests_by_Lab(id)
 
+
 @app.route('/user/test/<id>')
 @login_required
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
@@ -93,8 +111,6 @@ def test(id):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
 
 #
 # @app.route('/')
