@@ -23,6 +23,15 @@ from Users import *
 from Controllers.Hospital import *
 from Controllers.Lab import *
 
+# # Decorators
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return jsonify({"message": "You need to authenticate first", "status": 400}), 200
+    return wrap
 
 @app.route('/user/signup', methods=['POST'])
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
@@ -43,15 +52,25 @@ def login():
 
 
 @app.route('/user/hospital')
+@login_required
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def hospital():
     return Hospital().getAllHospitals()
 
 
 @app.route('/user/hospital/<id>')
+@login_required
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def doctor_hs(id):
+    return Hospital().getAllDoctors_by_Hospital(id)
+
+
+@app.route('/user/doctor/<id>')
+@login_required
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def doctor(id):
-    return Hospital().getAllDoctors_by_Hospital(id)
+    return Hospital().getDoctor(id)
+
 
 @app.route('/user/lab')
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
@@ -60,25 +79,22 @@ def lab():
 
 
 @app.route('/user/lab/<id>')
+@login_required
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
-def test(id):
+def test_lab(id):
     return Lab().getAllTests_by_Lab(id)
 
+@app.route('/user/test/<id>')
+@login_required
+@cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
+def test(id):
+    return Lab().getTest(id)
 
 
 if __name__ == '__main__':
     app.run(debug=True)
 
-# # Decorators
-# def login_required(f):
-#     @wraps(f)
-#     def wrap(*args, **kwargs):
-#         if 'logged_in' in session:
-#             return f(*args, **kwargs)
-#         else:
-#             return redirect('/')
-#
-#     return wrap
+
 
 #
 # @app.route('/')
