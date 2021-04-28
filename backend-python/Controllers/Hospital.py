@@ -1,7 +1,7 @@
-from app import mongo
 from utils.importlib import *
 
-class Hospital():
+
+class Hospital:
     def getAllHospitals(self):
         hospitals = mongo.db.hospital.find()
         hospitals = list(hospitals)
@@ -12,11 +12,28 @@ class Hospital():
         hospital = list(mongo.db.hospital.find({"_id": id}))
         doctors = mongo.db.doctor.find({"HospitalName": hospital[0]["HospitalName"]})
         doctors = list(doctors)
-        doctors[0]["status"] = 200
-        return jsonify(doctors), 200
+
+        doctors_ = []
+        for doctor in doctors:
+            d = {
+                "_id": doctor["_id"],
+                "DoctorName": doctor["DoctorName"],
+                "DoctorPicture": doctor["DoctorPicture"],
+                "DoctorDescription": doctor["DoctorDescription"],
+            }
+
+            doctors_.append(d)
+
+        doctors_api = {
+            "doctors": doctors_,
+            "status": 200
+        }
+
+        return jsonify(doctors_api), 200
 
     def getDoctor(self, id):
         doctor = list(mongo.db.doctor.find({"_id": id}))
         doctor = list(doctor)
         doctor[0]["status"] = 200
+
         return jsonify(doctor), 200

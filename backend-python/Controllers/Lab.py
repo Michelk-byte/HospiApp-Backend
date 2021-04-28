@@ -1,8 +1,7 @@
-from app import mongo
 from utils.importlib import *
 
 
-class Lab():
+class Lab:
     def getAllLabs(self):
         labs = mongo.db.lab.find()
         labs = list(labs)
@@ -12,9 +11,25 @@ class Lab():
     def getAllTests_by_Lab(self, id):
         lab = list(mongo.db.lab.find({"_id": id}))
         test = mongo.db.labtest.find({"Lab": lab[0]["Lab"]})
-        test = list(test)
-        test[0]["status"] = 200
-        return jsonify(test), 200
+        tests = list(test)
+
+        tests_ = []
+        for test in tests:
+            t = {
+                "_id": test["_id"],
+                "testtype": test["testtype"],
+                "testphoto": test["testphoto"],
+                "labtestdescription": test["labtestdescription"]
+            }
+
+            tests_.append(t)
+
+        tests_api = {
+            "tests": tests_,
+            "status": 200
+        }
+
+        return jsonify(tests_api), 200
 
     def getTest(self, id):
         test = list(mongo.db.labtest.find({"_id": id}))

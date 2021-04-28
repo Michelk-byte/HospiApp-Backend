@@ -1,8 +1,4 @@
-from flask import Flask, jsonify, request, session, redirect
-from passlib.hash import pbkdf2_sha256
-from app import mongo
-import uuid
-from utils.restrictions import restrictions
+from utils.importlib import *
 
 
 class User:
@@ -10,7 +6,7 @@ class User:
         del user['password']
         session['logged_in'] = True
         session['user'] = user
-        user['status'] = 200
+        user = {"sid": user['_id'], 'status': 200}
         return jsonify(user), 200
 
     def signup(self):
@@ -44,7 +40,7 @@ class User:
 
     def signout(self):
         session.clear()
-        return redirect('/')
+        return
 
     def login(self):
         data = request.get_json(force=True)
@@ -57,6 +53,14 @@ class User:
             return self.start_session(user)
 
         return jsonify({"message": "Invalid login credentials", "status": 400}), 200
+
+    def get_credentials(self, id):
+        user = mongo.db.users.find_one({
+            "_id": id
+        })
+        user["status"] = 200
+        del user['password']
+        return jsonify(user), 200
 
     def edit_profile(self, id):
         data = request.get_json(force=True)
