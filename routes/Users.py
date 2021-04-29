@@ -9,10 +9,10 @@ def signup():
     return User().signup()
 
 
-@app.route('/user/signout', methods=['GET'])
+@app.route('/user/signout', methods=['POST'])
 @cross_origin(headers=['Content- Type', 'Authorization'])
 def signout():
-    User().signout()
+    return User().signout()
 
 
 @app.route('/user/login', methods=['POST'])

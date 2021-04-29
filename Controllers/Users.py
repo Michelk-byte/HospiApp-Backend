@@ -4,6 +4,7 @@ from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
 import uuid
 
+
 class User:
     def start_session(self, user):
         del user['password']
@@ -43,7 +44,7 @@ class User:
 
     def signout(self):
         session.clear()
-        return
+        return "", 204
 
     def login(self):
         data = request.get_json(force=True)
