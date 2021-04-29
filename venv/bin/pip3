@@ -1,4 +1,4 @@
-#!/home/michel/Desktop/MobileDev/HospiApp/MobileDev/backend-python/venv/bin/python
+#!/home/michel/Desktop/MobileDev/HospiApp/MobileDev/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
