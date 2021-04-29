@@ -1,4 +1,4 @@
-from utils.importlib import *
+from app import mongo
 from flask import Flask, jsonify, request, session, redirect
 
 

@@ -1,6 +1,5 @@
-from utils.importlib import *
 from flask import Flask, jsonify, request, session, redirect
-
+from app import mongo
 
 class Appointment:
     def post_appointment_hospital(self):
