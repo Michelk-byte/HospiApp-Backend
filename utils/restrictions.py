@@ -1,10 +1,16 @@
-from Controllers.Users import *
+from flask import jsonify
 
 
 def restrictions(data, profile, editprofile):
     if profile:
         if len(data["name"]) == 0:
             return jsonify({"message": "Username empty", "status": 400}), 200
+
+        def hasNumbers(inputString):
+            return any(char.isdigit() for char in inputString)
+
+        if hasNumbers(data["name"]):
+            return jsonify({"message": "Username contains numbers!", "status": 400}), 200
 
         if len(data["pnumber"]) == 0:
             return jsonify({"message": "Phone number empty", "status": 400}), 200
