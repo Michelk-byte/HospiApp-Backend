@@ -64,7 +64,7 @@ class Appointment:
         print(test)
         lab_availibility_day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] if test[
                                                                                                "testday"] == "Weekdays" else \
-        test['testday'].replace(" ", "").split("-")
+            test['testday'].replace(" ", "").split("-")
 
         if date.strftime('%A') not in lab_availibility_day:
             return jsonify({"message": "Lab Not Available that day", "status": 400}), 200
@@ -110,7 +110,43 @@ class Appointment:
         hos_app = mongo.db.appointment_hospital.find({"userid": id})
         lab_app = mongo.db.appointment_lab.find({"userid": id})
 
-        appointments_ = list(hos_app) + list(lab_app)
+        appointments_tmp = list(hos_app) + list(lab_app)
+
+        appointments_ = []
+
+        for app in appointments_tmp:
+            if 'DoctorID' in app:
+                doctor = mongo.db.doctor.find_one({"_id": app["DoctorID"]})
+                hospital = mongo.db.hospital.find_one({"HospitalName": doctor["HospitalName"]})
+
+                name = doctor['DoctorName']
+                location_name = doctor['HospitalName']
+                location = hospital["HospitalLocation"]
+                type = "Doctor"
+            else:
+                test = mongo.db.labtest.find_one({"_id": app["TestID"]})
+                lab = mongo.db.lab.find_one({"Lab": test["Lab"]})
+                name = test['testtype']
+                location_name = test['Lab']
+                location = lab["LabLocation"]
+                type = "Test"
+
+            app_date = parser.parse(app['DateTime']).replace(tzinfo=None)
+            day_left = (app_date - datetime.datetime.now()).days
+
+
+            appointment = {
+                "_id": app["_id"],
+                "userid": app["_id"],
+                "Type": type,
+                "Name": name,
+                "locationName": location_name,
+                "Location": location,
+                "DateTime": app['DateTime'],
+                "DayLeft": day_left
+            }
+
+            appointments_.append(appointment)
 
         appointments = {
             "appointments": appointments_,
