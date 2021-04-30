@@ -1,2 +1,4 @@
-frontend-react/node_modules
-backend-python/venv
+utils/database.py
+data/*
+__pycache__/*
+venv/*
