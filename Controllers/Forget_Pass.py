@@ -23,6 +23,8 @@ class Forget_Pass:
 
     def send_mail(self):
         data = request.get_json(force=True)
+        if len(data['email']) == 0:
+            return jsonify({"message": "Insert your email in the email text box!", "status": 400}), 200
         user = mongo.db.users.find_one({"email": data['email']})
         print(user)
         if not user:
