@@ -1,11 +1,30 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask_pymongo import PyMongo
+from flask_mail import Mail
 
 app = Flask(__name__)
 # app.secret_key = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 app.config['CORS_HEADERS'] = 'Content-Type'
+# app.config['SECRET_KEY'] = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
 app.config['SECRET_KEY'] = b'\xcc^\x91\xea\x17-\xd0W\x03\xa7\xf8J0\xac8\xc5'
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['REMEMBER_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Strict'
+
+#config mail
+app.config.update(dict(
+    DEBUG=True,
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=587,
+    MAIL_USE_TLS=True,
+    MAIL_USE_SSL=False,
+    MAIL_USERNAME='mathiewleblanc2000@gmail.com',
+    MAIL_PASSWORD='pdqbabjgrcnjxikh',
+))
+
+mail = Mail(app)
+
 
 # Database
 app.config["MONGO_URI"] = "mongodb+srv://MichelKhoury:mobileapp@cluster0.zdacn.mongodb.net/hospiapp?retryWrites=true" \
@@ -18,17 +37,10 @@ from routes.Hospital import *
 from routes.Lab import *
 from routes.Users import *
 from routes.Appointments import *
+from routes.Forget_Pass import *
 
 if __name__ == '__main__':
     app.run(debug=True)
 
-#
-# @app.route('/')
-# def home():
-#     return render_template('home.html')
-#
-#
-# @app.route('/dashboard/')
-# @login_required
-# def dashboard():
-#     return render_template('dashboard.html')
+
+

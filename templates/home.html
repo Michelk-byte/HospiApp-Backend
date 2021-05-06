@@ -5,46 +5,25 @@
 
         <div class="card">
 
-            <h1 class="center">Create an Account</h1>
+            <h1 class="center">Change your password {{ var['name'] }}</h1>
 
-            <form name="signup_form">
+            <form name="changepassword_form">
 
-                <label for="name">Name</label>
-                <input type="text" name="name" class="field" required>
+                <label for="password">New Password</label>
+                <input type="text" name="password" class="field" required>
 
-                <label for="email">Email</label>
-                <input type="email" name="email" class="field" required>
-
-                <label for="password">Password</label>
-                <input type="password" name="password" class="field" required>
+                <label for="verifypassword">Verify Password</label>
+                <input type="text" name="verifypassword" class="field" required>
 
                 <p class="error error--hidden"></p>
 
-                <input type="submit" value="Sign Up" class="btn">
+                <input type="submit" value="Reset" class="btn">
 
             </form>
 
         </div>
 
-        <div class="card">
 
-            <h1 class="center">Log In</h1>
-
-            <form name="login_form">
-
-                <label for="email">Email</label>
-                <input type="email" name="email" class="field" required>
-
-                <label for="password">Password</label>
-                <input type="password" name="password" class="field" required>
-
-                <p class="error error--hidden"></p>
-
-                <input type="submit" value="Log In" class="btn">
-
-            </form>
-
-        </div>
 
     </div>
 {% endblock %}

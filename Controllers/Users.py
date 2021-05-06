@@ -11,6 +11,7 @@ class User:
         session['logged_in'] = True
         session['user'] = user
         user = {"sid": user['_id'], 'status': 200}
+        print(session)
         return jsonify(user), 200
 
     def signup(self):
