@@ -10,12 +10,14 @@ def hospital():
 
 
 @app.route('/user/hospital/<id>', methods=['GET'])
+@login_required
 @cross_origin(headers=['Content- Type', 'Authorization'])
 def doctor_hs(id):
     return Hospital().getAllDoctors_by_Hospital(id)
 
 
 @app.route('/user/doctor/<id>', methods=['GET'])
+@login_required
 @cross_origin(headers=['Content- Type', 'Authorization'])
 def doctor(id):
     return Hospital().getDoctor(id)
