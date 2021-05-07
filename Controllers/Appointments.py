@@ -123,10 +123,11 @@ class Appointment:
             if 'DoctorID' in app:
                 doctor = mongo.db.doctor.find_one({"_id": app["DoctorID"]})
                 hospital = mongo.db.hospital.find_one({"HospitalName": doctor["HospitalName"]})
-
                 name = doctor['DoctorName']
                 location_name = doctor['HospitalName']
                 location = hospital["HospitalLocation"]
+                location_id = hospital["_id"]
+                asset_id = doctor["_id"]
                 type = "Doctor"
             else:
                 test = mongo.db.labtest.find_one({"_id": app["TestID"]})
@@ -134,6 +135,8 @@ class Appointment:
                 name = test['testtype']
                 location_name = test['Lab']
                 location = lab["LabLocation"]
+                location_id = lab["_id"]
+                asset_id = test["_id"]
                 type = "Test"
 
             app_date = parser.parse(app['DateTime']).replace(tzinfo=None)
@@ -141,8 +144,9 @@ class Appointment:
 
 
             appointment = {
-                "_id": app["_id"],
-                "userid": app["_id"],
+                "_id":  app["_id"],
+                "asset_id": asset_id,
+                "location_id": location_id,
                 "Type": type,
                 "Name": name,
                 "locationName": location_name,
