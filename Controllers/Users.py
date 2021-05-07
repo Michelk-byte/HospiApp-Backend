@@ -16,7 +16,7 @@ class User:
 
     def signup(self):
         data = request.get_json(force=True)
-        data['email'] = data['email'].lower()
+        data['email'] = data['email'].lower().strip()
         print(data)
 
         # Check for restrictions
