@@ -21,11 +21,13 @@ class Appointment:
         doctor_availibility_hours = doctor['AvailabilityTime'].replace(" ", "").split("->")
 
         start = float(doctor_availibility_hours[0][:-2])
-        end = start + float(doctor_availibility_hours[1][:-2])
+        end = start + float(doctor_availibility_hours[1][:-2]) + 3
+        print("start hour = " + str(start))
+        print("end hour = " + str(end))
         if not (start <= date.hour < end):
             return jsonify({"message": "Doctor Not Available on this hour", "status": 400}), 200
 
-        # Check if you dont book two appointments at the same time:
+        # Check if you didnt book two appointments at the same time:
         if len(list(
                 mongo.db.appointment_hospital.find({"DateTime": data["DateTime"], "userid": data["_id"]}))) > 0:
             return jsonify(
@@ -65,14 +67,17 @@ class Appointment:
         lab_availibility_day = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] if test[
                                                                                                "testday"] == "Weekdays" else \
             test['testday'].replace(" ", "").split("-")
-
+        print("current day: " + date.strftime('%A'))
+        print(lab_availibility_day)
         if date.strftime('%A') not in lab_availibility_day:
             return jsonify({"message": "Lab Not Available that day", "status": 400}), 200
 
         test_availibility_hours = test['testtime'].replace(" ", "").split("->")
 
         start = float(test_availibility_hours[0][:-2])
-        end = start + float(test_availibility_hours[1][:-2])
+        end = start + float(test_availibility_hours[1][:-2]) + 3
+        print("start hour = " + str(start))
+        print("end hour = " + str(end))
         if not (start <= date.hour < end):
             return jsonify({"message": "Lab Not Available on this hour", "status": 400}), 200
 
