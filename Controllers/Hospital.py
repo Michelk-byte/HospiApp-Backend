@@ -21,6 +21,7 @@ class Hospital:
                 "DoctorName": doctor["DoctorName"],
                 "DoctorPicture": doctor["DoctorPicture"],
                 "DoctorDescription": doctor["DoctorDescription"],
+                "DoctorSpecialty": doctor['DoctorSpecialty']
             }
 
             doctors_.append(d)
