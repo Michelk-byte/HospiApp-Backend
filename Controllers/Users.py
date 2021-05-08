@@ -26,10 +26,17 @@ class User:
         # Create the user object
         user = {
             "_id": uuid.uuid4().hex,
-            "name": data['name'],
+            "username": data['username'],
+            "firstname": data['firstname'],
+            "lastname": data['lastname'],
             "email": data['email'],
             "password": data['password'],
-            "pnumber": data['pnumber']
+            "pnumber": data['pnumber'],
+            "height": data["height"],
+            "weight": data["weight"],
+            "date_of_birth": data["date_of_birth"],
+            "location": data["location"],
+            "bloodtype": data["bloodtype"]
         }
 
         # Encrypt the password
@@ -38,6 +45,10 @@ class User:
         # Check for existing email address
         if mongo.db.users.find_one({"email": user['email']}):
             return jsonify({"message": "Email address already in use", "status": 400}), 200
+
+        # Check for existing username
+        if mongo.db.users.find_one({"username": user['username']}):
+            return jsonify({"message": "Username already in use", "status": 400}), 200
 
         if mongo.db.users.insert(user, w="majority"):
             return jsonify({"message": "Account Created!", "status": 200}), 200
@@ -52,7 +63,8 @@ class User:
         data = request.get_json(force=True)
         print(data)
         user = mongo.db.users.find_one({
-            "email": data['email']
+            "email": data['email'],
+            "username": data['username']
         })
 
         if user and pbkdf2_sha256.verify(data['password'], user['password']):
@@ -80,7 +92,12 @@ class User:
             '$set': {
                 "name": data['name'],
                 "email": data['email'],
-                "pnumber": data['pnumber']
+                "pnumber": data['pnumber'],
+                "height": data["height"],
+                "weight": data["weight"],
+                "date_of_birth": data["date_of_birth"],
+                "location": data["location"],
+                "bloodtype": data["bloodtype"]
             }
         })
 
