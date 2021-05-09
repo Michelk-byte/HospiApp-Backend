@@ -98,7 +98,8 @@ class User:
                 "weight": data["weight"],
                 "date_of_birth": data["date_of_birth"],
                 "location": data["location"],
-                "bloodtype": data["bloodtype"]
+                "bloodtype": data["bloodtype"],
+                "gender": data['gender']
             }
         })
 
