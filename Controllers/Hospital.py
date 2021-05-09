@@ -39,3 +39,49 @@ class Hospital:
         doctor[0]["status"] = 200
 
         return jsonify(doctor), 200
+
+    def getAllSpecialty(self, hospital_id):
+        hospital = list(mongo.db.hospital.find({"_id": hospital_id}))
+        doctors = mongo.db.doctor.find({"HospitalName": hospital[0]["HospitalName"]})
+        doctors = list(doctors)
+
+        all_specialty = []
+
+        for doctor in doctors:
+            all_specialty.append(doctor['DoctorSpecialty'])
+
+        specialties = {
+            "all_specialties": all_specialty,
+            "status": 200
+        }
+
+        return jsonify(specialties), 200
+
+    def get_AllDoctors_by_Specialty(self):
+        id = request.args.get('id')
+        specialty = request.args.get('specialty')
+
+        hospital = list(mongo.db.hospital.find({"_id": id}))
+        doctors = mongo.db.doctor.find({"HospitalName": hospital[0]["HospitalName"], "DoctorSpecialty": specialty})
+        doctors = list(doctors)
+
+        doctors_ = []
+        for doctor in doctors:
+            d = {
+                "_id": doctor["_id"],
+                "DoctorName": doctor["DoctorName"],
+                "DoctorPicture": doctor["DoctorPicture"],
+                "DoctorDescription": doctor["DoctorDescription"],
+                "DoctorSpecialty": doctor['DoctorSpecialty']
+            }
+
+            doctors_.append(d)
+
+        doctors_api = {
+            "doctors": doctors_,
+            "status": 200
+        }
+
+        return jsonify(doctors_api), 200
+
+

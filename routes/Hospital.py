@@ -19,3 +19,15 @@ def doctor_hs(id):
 @cross_origin(headers=['Content- Type', 'Authorization'])
 def doctor(id):
     return Hospital().getDoctor(id)
+
+
+@app.route('/user/doctor/specialty/<id>', methods=['GET'])
+@cross_origin(headers=['Content- Type', 'Authorization'])
+def all_specialty(id):
+    return Hospital().getAllSpecialty(id)
+
+
+@app.route('/user/doctorbyspecialty', methods=['GET'])
+@cross_origin(headers=['Content- Type', 'Authorization'])
+def all_doctors_by_specialty():
+    return Hospital().get_AllDoctors_by_Specialty()
