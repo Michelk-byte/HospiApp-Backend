@@ -20,8 +20,8 @@ class User:
         print(data)
 
         # Check for restrictions
-        if restrictions(data, True, True):
-            return restrictions(data, True, True)
+        if restrictions(data, True, True, True):
+            return restrictions(data, True, True, True)
 
         # Create the user object
         user = {
@@ -89,14 +89,13 @@ class User:
     def edit_profile(self, id):
         data = request.get_json(force=True)
 
-        if restrictions(data, True, False):
-            return restrictions(data, True, False)
+        if restrictions(data, True, False, False):
+            return restrictions(data, True, False,  False)
 
         mongo.db.users.update_one({
             "_id": id
         }, {
             '$set': {
-                "name": data['name'],
                 "firstname": data['firstname'],
                 "lastname": data['lastname'],
                 "email": data['email'],
@@ -115,8 +114,8 @@ class User:
     def changepassword(self, id):
         data = request.get_json(force=True)
 
-        if restrictions(data, False, True):
-            return restrictions(data, False, True)
+        if restrictions(data, False, True, False):
+            return restrictions(data, False, True, False)
 
         user = mongo.db.users.find_one({
             "_id": id

@@ -2,11 +2,22 @@ from flask import jsonify
 import re
 
 
-def restrictions(data, profile, editprofile):
+def restrictions(data, profile, editprofile, signup):
     pattern = re.compile(r"[$&+,:;=?#|'<>.^*()%!-]")
 
     def hasNumbers(inputString):
         return any(char.isdigit() for char in inputString)
+
+    if signup:
+        # username
+        if len(data["username"]) == 0:
+            return jsonify({"message": "Username empty", "status": 400}), 200
+
+        if len(data["username"]) > 10:
+            return jsonify({"message": "Username too long", "status": 400}), 200
+
+        if len(pattern.findall(data['username'])) > 0:
+            return jsonify({"message": "Username contains special characters", "status": 400}), 200
 
     if profile:
         #firstname
@@ -34,16 +45,6 @@ def restrictions(data, profile, editprofile):
 
         if hasNumbers(data["lastname"]):
             return jsonify({"message": "Lastname contains numbers!", "status": 400}), 200
-
-        #username
-        if len(data["username"]) == 0:
-            return jsonify({"message": "Username empty", "status": 400}), 200
-
-        if len(data["username"]) > 10:
-            return jsonify({"message": "Username too long", "status": 400}), 200
-
-        if len(pattern.findall(data['username'])) > 0:
-            return jsonify({"message": "Username contains special characters", "status": 400}), 200
 
 
         #phone number
