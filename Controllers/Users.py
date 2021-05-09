@@ -63,13 +63,18 @@ class User:
     def login(self):
         data = request.get_json(force=True)
         print(data)
-        user = mongo.db.users.find_one({
-            "email": data['email'],
-            "username": data['username']
+        user_email = mongo.db.users.find_one({
+            "email": data['name']
         })
 
-        if user and pbkdf2_sha256.verify(data['password'], user['password']):
-            return self.start_session(user)
+        user_username = mongo.db.users.find_one({
+            "username": data['name']
+        })
+
+        if user_username or user_email:
+            user = user_username if user_username else user_email
+            if pbkdf2_sha256.verify(data['password'], user['password']):
+                return self.start_session(user)
 
         return jsonify({"message": "Invalid login credentials", "status": 400}), 200
 
@@ -92,6 +97,8 @@ class User:
         }, {
             '$set': {
                 "name": data['name'],
+                "firstname": data['firstname'],
+                "lastname": data['lastname'],
                 "email": data['email'],
                 "pnumber": data['pnumber'],
                 "height": data["height"],
