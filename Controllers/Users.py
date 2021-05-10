@@ -2,6 +2,7 @@ from app import mongo
 from utils.restrictions import restrictions
 from flask import Flask, jsonify, request, session, redirect
 from passlib.hash import pbkdf2_sha256
+from dateutil import parser
 import uuid
 
 
@@ -83,7 +84,11 @@ class User:
             "_id": id
         })
         user["status"] = 200
+        birthdate = user['date_of_birth']
+        birthdate = parser.parse(birthdate)
+        birthdate = str(birthdate.month) + "/" + str(birthdate.day) + "/" + str(birthdate.year)
         del user['password']
+        user['date_of_birth'] = birthdate
         return jsonify(user), 200
 
     def edit_profile(self, id):
