@@ -45,10 +45,11 @@ class Hospital:
         doctors = mongo.db.doctor.find({"HospitalName": hospital[0]["HospitalName"]})
         doctors = list(doctors)
 
-        all_specialty = []
+        all_specialty = ["All"]
 
         for doctor in doctors:
             all_specialty.append(doctor['DoctorSpecialty'])
+
 
         specialties = {
             "all_specialties": all_specialty,

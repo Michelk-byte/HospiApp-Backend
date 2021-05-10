@@ -60,6 +60,7 @@ class Predict:
         pred = loaded_model.predict(new_array)
 
         predictions = {
-            "prediction": labels[np.argmax(pred[0])]
+            "Medicament_Name": labels[np.argmax(pred[0])]
+
         }
         return jsonify(predictions), 200
