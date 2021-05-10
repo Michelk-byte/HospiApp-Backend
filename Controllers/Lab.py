@@ -48,6 +48,8 @@ class Lab:
         for test in tests:
             all_types.append(test['testtype'])
 
+        all_types = list(set(all_types))
+
         types = {
             "all_types": all_types,
             "status": 200

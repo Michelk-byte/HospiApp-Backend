@@ -50,6 +50,7 @@ class Hospital:
         for doctor in doctors:
             all_specialty.append(doctor['DoctorSpecialty'])
 
+        all_specialty = list(set(all_specialty))
 
         specialties = {
             "all_specialties": all_specialty,
