@@ -14,7 +14,6 @@ from PIL import Image
 class Predict:
     def get_prediction(self):
         file_binary = request.form.get('file')
-        print(file_binary)
         file_binary = file_binary[23:]
         file_binary = base64.b64decode(file_binary)
         image_stream = io.BytesIO(file_binary)

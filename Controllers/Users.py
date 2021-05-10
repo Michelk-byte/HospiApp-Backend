@@ -88,9 +88,10 @@ class User:
 
     def edit_profile(self, id):
         data = request.get_json(force=True)
+        print(data)
 
         if restrictions(data, True, False, False):
-            return restrictions(data, True, False,  False)
+            return restrictions(data, True, False, False)
 
         mongo.db.users.update_one({
             "_id": id
@@ -108,6 +109,7 @@ class User:
                 "gender": data['gender']
             }
         })
+        print(mongo.db.users.find_one({"_id": id}))
 
         return jsonify({"message": "Profile Updated", "status": 200}), 200
 
