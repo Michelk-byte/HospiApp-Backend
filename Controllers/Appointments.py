@@ -156,7 +156,7 @@ class Appointment:
 
             datetime_ = parser.parse(app['DateTime'])
             date = str(datetime_.year) + "-" + str(datetime_.month) + "-" + str(datetime_.day)
-            time = str(datetime_.hour) + ":" + str(datetime_.min)
+            time = str(datetime_.hour) + ":" + str(datetime_.minute)
             appointment['Date'] = date
             appointment['Time'] = time
 
