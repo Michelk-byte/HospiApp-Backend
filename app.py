@@ -38,6 +38,7 @@ from routes.Lab import *
 from routes.Users import *
 from routes.Appointments import *
 from routes.Forget_Pass import *
+from routes.Predict import *
 
 if __name__ == '__main__':
     app.run(debug=True)

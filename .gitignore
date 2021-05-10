@@ -2,3 +2,9 @@ utils/database.py
 data/*
 __pycache__/*
 venv/*
+medicaments/*
+medicaments (copy)/*
+.idea/*
+Controllers/__pycache__/*
+routes/__pycache__/*
+utils/__pycache__/*
