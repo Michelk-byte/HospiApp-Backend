@@ -58,14 +58,20 @@ class Lab:
     def get_AllTests_by_Types(self):
         id = request.args.get('id')
         type = request.args.get('type')
+        types = type.split(",")
 
+        all_types_test = []
         lab = list(mongo.db.lab.find({"_id": id}))
-        test = mongo.db.labtest.find({"Lab": lab[0]["Lab"], "testtype": type})
-        tests = list(test)
+        for type in types:
+            test = mongo.db.labtest.find({"Lab": lab[0]["Lab"], "testtype": type})
+            tests = list(test)
+            for ty in tests:
+                all_types_test.append(ty)
+        print(all_types_test)
 
         tests_ = []
 
-        for test in tests:
+        for test in all_types_test:
             t = {
                 "_id": test["_id"],
                 "testtype": test["testtype"],
