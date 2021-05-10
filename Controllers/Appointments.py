@@ -155,8 +155,11 @@ class Appointment:
             }
 
             datetime_ = parser.parse(app['DateTime'])
-            date = str(datetime_.year) + "-" + str(datetime_.month) + "-" + str(datetime_.day)
-            time = str(datetime_.hour) + ":" + str(datetime_.minute)
+            day = str(datetime_.day) if datetime_.day > 9 else "0" + str(datetime_.day)
+            month = str(datetime_.month) if datetime_.month > 9 else "0" + str(datetime_.month)
+            minute = str(datetime_.minute) if datetime_.minute > 9 else "0" + str(datetime_.minute)
+            date = str(datetime_.year) + "-" + month + "-" + day
+            time = str(datetime_.hour) + ":" + str(minute)
             appointment['Date'] = date
             appointment['Time'] = time
 
