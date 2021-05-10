@@ -140,7 +140,7 @@ class User:
                 })
                 print(user["email"])
                 print(request.form.get('password'))
-                return jsonify({"success": "Password Changed!!", "status": 200}), 200
-            return jsonify({"error": "You didnt confirm your new password", "status": 400}), 200
+                return jsonify({"message": "Password Changed!!", "status": 200}), 200
+            return jsonify({"message": "You didnt confirm your new password", "status": 400}), 200
 
         return jsonify({"message": "Old password Incorrect", "status": 400}), 200
