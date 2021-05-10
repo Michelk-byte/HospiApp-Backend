@@ -151,13 +151,15 @@ class Appointment:
                 "Name": name,
                 "locationName": location_name,
                 "Location": location,
-                "DateTime": app['DateTime'],
                 "DayLeft": day_left
             }
 
             datetime_ = parser.parse(appointment['DateTime'])
-            datetime_ = str(datetime_.year) + "-" + str(datetime_.month) + "-" + str(datetime_.day)
-            appointment['DateTime'] = datetime_
+            date = str(datetime_.year) + "-" + str(datetime_.month) + "-" + str(datetime_.day)
+            time = str(datetime_.hour) + ":" + str(datetime_.min)
+            appointment['Date'] = date
+            appointment['Time'] = time
+
 
             appointments_.append(appointment)
 
