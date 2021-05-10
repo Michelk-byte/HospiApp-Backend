@@ -155,6 +155,10 @@ class Appointment:
                 "DayLeft": day_left
             }
 
+            datetime_ = parser.parse(appointment['DateTime'])
+            datetime_ = str(datetime_.year) + "-" + str(datetime_.month) + "-" + str(datetime_.day)
+            appointment['DateTime'] = datetime_
+
             appointments_.append(appointment)
 
         appointments = {
