@@ -61,6 +61,7 @@ class Hospital:
     def get_AllDoctors_by_Specialty(self):
         id = request.args.get('id')
         specialty = request.args.get('specialty')
+        print(specialty)
 
         hospital = list(mongo.db.hospital.find({"_id": id}))
         doctors = mongo.db.doctor.find({"HospitalName": hospital[0]["HospitalName"], "DoctorSpecialty": specialty})
