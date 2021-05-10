@@ -43,7 +43,7 @@ class Lab:
         test = mongo.db.labtest.find({"Lab": lab[0]["Lab"]})
         tests = list(test)
 
-        all_types = ["All"]
+        all_types = []
 
         for test in tests:
             all_types.append(test['testtype'])
