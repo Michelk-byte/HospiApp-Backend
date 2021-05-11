@@ -91,7 +91,7 @@ class Predict:
             "description": pred['description'],
             "price": pred['price'],
             "number_of_caplets": pred['number_of_caplets'],
-            "doses_per_day": pred['dose_per_day'],
+            "doses_per_day": pred['doses_per_day'],
             "side_effects": pred['side_effects']
         }
         return jsonify(predictions), 200
