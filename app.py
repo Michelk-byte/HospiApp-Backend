@@ -19,16 +19,15 @@ app.config.update(dict(
     MAIL_PORT=587,
     MAIL_USE_TLS=True,
     MAIL_USE_SSL=False,
-    MAIL_USERNAME='mathiewleblanc2000@gmail.com',
-    MAIL_PASSWORD='pdqbabjgrcnjxikh',
+    MAIL_USERNAME='',
+    MAIL_PASSWORD='',
 ))
 
 mail = Mail(app)
 
 
 # Database
-app.config["MONGO_URI"] = "mongodb+srv://MichelKhoury:mobileapp@cluster0.zdacn.mongodb.net/hospiapp?retryWrites=true" \
-                          "&w=majority"
+app.config["MONGO_URI"] = "" # MongoDB URI
 mongo = PyMongo(app)
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
