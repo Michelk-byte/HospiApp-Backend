@@ -22,18 +22,21 @@ def login():
 
 
 @app.route('/user/<id>', methods=['GET'])
+@login_required
 @cross_origin(headers=['Content- Type', 'Authorization'])
 def get_credentials(id):
     return User().get_credentials(id)
 
 
 @app.route('/user/editprofile/<id>', methods=['PUT'])
+@login_required
 @cross_origin(headers=['Content- Type', 'Authorization'])
 def edit_profile(id):
     return User().edit_profile(id)
 
 
 @app.route('/user/changepassword/<id>', methods=['PUT'])
+@login_required
 @cross_origin(origin='localhost', headers=['Content- Type', 'Authorization'])
 def change_password(id):
     return User().changepassword(id)
