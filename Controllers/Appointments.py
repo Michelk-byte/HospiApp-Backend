@@ -78,7 +78,7 @@ class Appointment:
         end = start + float(test_availibility_hours[1][:-2]) + 3
         print("start hour = " + str(start))
         print("end hour = " + str(end))
-        if not (start <= date.hour+3 < end):
+        if not (start <= date.hour + 3 < end):
             return jsonify({"message": "Lab Not Available on this hour", "status": 400}), 200
 
         if len(list(
@@ -159,7 +159,7 @@ class Appointment:
             month = str(datetime_.month) if datetime_.month > 9 else "0" + str(datetime_.month)
             minute = str(datetime_.minute) if datetime_.minute > 9 else "0" + str(datetime_.minute)
             date = str(datetime_.year) + "-" + month + "-" + day
-            time = str(datetime_.hour) + ":" + str(minute)
+            time = str(datetime_.hour+3) + ":" + str(minute)
             appointment['Date'] = date
             appointment['Time'] = time
 
