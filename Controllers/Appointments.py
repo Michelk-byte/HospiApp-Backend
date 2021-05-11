@@ -140,7 +140,7 @@ class Appointment:
                 type = "Test"
 
             app_date = parser.parse(app['DateTime']).replace(tzinfo=None)
-            day_left = (app_date - datetime.datetime.now()).days
+            day_left = (app_date - datetime.datetime.now()).days + 1
 
 
             appointment = {
